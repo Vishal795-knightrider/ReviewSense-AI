@@ -506,13 +506,13 @@ ASPECT_TAXONOMY = {
     },
     "Display & Screen": {
         "keywords": ["display", "screen", "amoled", "oled", "lcd", "panel", "refresh rate", "120hz", "90hz", "brightness", "glare", "resolution"],
-        "inherent_pos": ["glare-free", "glare-free screen", "stunning display", "vibrant colors", "crisp screen", "amoled display is stunning", "smooth 120hz", "stunning in bright sunlight"],
+        "inherent_pos": ["glare-free", "glare-free screen", "stunning display", "vibrant colors", "crisp screen", "amoled display is stunning", "smooth 120hz", "stunning in bright sunlight", "bright display", "display is bright"],
         "inherent_neg": ["green line", "green vertical line", "screen flicker", "flickering", "dead pixel", "dim display", "washed out", "digital noise", "vertical line"]
     },
     "Camera & Photography": {
         "keywords": ["camera", "cameras", "photo", "photos", "picture", "pictures", "lens", "lenses", "sensor", "portrait", "night mode", "low-light", "video recording", "selfie", "photography"],
-        "inherent_pos": ["stunning photos", "great detail", "computational photography", "crisp photos", "clear photos", "computational photography and voice dictation"],
-        "inherent_neg": ["blurry", "grainy", "digital noise", "poor camera", "washed out photos", "bad low-light", "blurry camera"]
+        "inherent_pos": ["stunning photos", "great detail", "computational photography", "crisp photos", "clear photos", "computational photography and voice dictation", "excellent camera"],
+        "inherent_neg": ["blurry", "grainy", "digital noise", "poor camera", "camera is terrible", "washed out photos", "bad low-light", "blurry camera"]
     },
     "Performance & Speed": {
         "keywords": ["performance", "speed", "processor", "chipset", "cpu", "gpu", "ram", "multitasking", "gaming", "fps", "frame rate", "snappy", "lag", "latency", "performs", "processing power", "processing"],
@@ -522,7 +522,7 @@ ASPECT_TAXONOMY = {
     "Heating & Thermals": {
         "keywords": ["heating", "heats", "overheating", "overheats", "thermal", "thermals", "temperature", "warm", "cooling", "fan", "fans", "heat"],
         "inherent_pos": ["runs cool", "stays cool", "no heating", "good cooling", "efficient cooling", "silent operation", "completely silent", "without heating"],
-        "inherent_neg": ["overheats", "overheating", "heats up", "runs hot", "gets hot", "thermal throttling", "loud fan", "loud fans", "device overheats", "fans get fairly loud", "cooling fans get fairly loud"]
+        "inherent_neg": ["overheats", "overheating", "heats up", "runs hot", "gets hot", "thermal throttling", "loud fan", "loud fans", "device overheats", "fans get fairly loud", "cooling fans get fairly loud", "phone overheats"]
     },
     "Build Quality & Design": {
         "keywords": ["build quality", "build", "design", "hinge", "casing", "plastic", "metal", "chassis", "durability", "durable", "sturdy", "finish", "creak", "creaks", "body", "look and feel", "keyboard", "trackpad", "scroll wheel", "ear cushions", "cushions"],
@@ -552,7 +552,8 @@ POSITIVE_WORDS = {
     "fast", "solid", "reliable", "durable", "sturdy", "premium", "top-notch", "top notch",
     "decent", "fine", "acceptable", "adequate", "satisfactory", "love", "loved", "best",
     "flawless", "comfortable", "pristine", "easy", "well-built", "worth", "silent", "cool",
-    "unmatched", "ultra-fast", "super-fast", "crystal", "addictive", "accurately", "well", "enough"
+    "unmatched", "ultra-fast", "super-fast", "crystal", "addictive", "accurately", "well", "enough",
+    "bright", "brightness", "sharp", "vivid", "responsive", "rich", "long"
 }
 
 NEGATIVE_WORDS = {
@@ -573,14 +574,49 @@ NEGATION_TERMS = {
 }
 
 def split_into_clauses(text: str):
-    """Splits review into clauses using punctuation and contrastive conjunctions."""
+    """
+    Splits review into clauses using punctuation, contrastive conjunctions,
+    and coordinated conjunctions (e.g., ', and', ', while', and standalone 'and' when connecting distinct aspect propositions).
+    """
     text = text.strip()
-    pattern = r'[.!?;\n]+|,\s*(?:but|however|although|though|yet|whereas|while|except)\s*|\s+(?:but|however|although|though|yet|whereas|while)\s+'
-    raw_clauses = re.split(pattern, text, flags=re.IGNORECASE)
-    return [c.strip() for c in raw_clauses if c.strip()]
+    primary_pattern = r'[.!?;\n]+|,\s*(?:but|however|although|though|yet|whereas|while|except|and)\s*|\s+(?:but|however|although|though|yet|whereas|while)\s+'
+    raw_clauses = [c.strip() for c in re.split(primary_pattern, text, flags=re.IGNORECASE) if c.strip()]
+
+    final_clauses = []
+    for clause in raw_clauses:
+        # Check if ' and ' conjoins two distinct aspect-carrying clauses
+        sub_parts = re.split(r'\s+and\s+', clause, flags=re.IGNORECASE)
+        if len(sub_parts) > 1:
+            can_split = True
+            for sp in sub_parts:
+                sp_tokens = set(re.findall(r'\b\w+\b', sp.lower()))
+                has_aspect = any(any(kw in sp.lower() for kw in asp["keywords"]) for asp in ASPECT_TAXONOMY.values())
+                has_sent = bool(sp_tokens & (POSITIVE_WORDS | NEGATIVE_WORDS))
+                if not (has_aspect or has_sent):
+                    can_split = False
+                    break
+            if can_split:
+                for sp in sub_parts:
+                    if sp.strip():
+                        final_clauses.append(sp.strip())
+                continue
+        final_clauses.append(clause)
+
+    return final_clauses
+
+def get_aspect_token_indices(tokens, aspect_info):
+    """Locates token positions of the matched aspect keywords in the clause."""
+    indices = []
+    for kw in aspect_info["keywords"]:
+        kw_tokens = re.findall(r'\b[\w\'-]+\b', kw.lower())
+        kw_len = len(kw_tokens)
+        for i in range(len(tokens) - kw_len + 1):
+            if tokens[i:i+kw_len] == kw_tokens:
+                indices.extend(range(i, i+kw_len))
+    return set(indices)
 
 def analyze_aspect_in_clause(clause: str, aspect_name: str, aspect_info: dict):
-    """Determines whether a clause expresses positive, negative, or neutral opinion on an aspect."""
+    """Determines whether a clause expresses positive, negative, or neutral opinion on an aspect using local evidence."""
     clause_lower = clause.lower()
 
     # Match check
@@ -618,8 +654,10 @@ def analyze_aspect_in_clause(clause: str, aspect_name: str, aspect_info: dict):
             negated = any(re.search(r'\b' + re.escape(neg) + r'\b\s+(?:\w+\s+){0,2}' + re.escape(ineg.split()[0]), clause_lower) for neg in NEGATION_TERMS)
             return "pos" if negated else "neg"
 
-    # Contextual token scanning with negation window
+    # Contextual token scanning using LOCAL EVIDENCE proximity
     tokens = re.findall(r'\b[\w\'-]+\b', clause_lower)
+    aspect_indices = get_aspect_token_indices(tokens, aspect_info)
+
     pos_score = 0.0
     neg_score = 0.0
 
@@ -631,20 +669,32 @@ def analyze_aspect_in_clause(clause: str, aspect_name: str, aspect_info: dict):
         if not (token_is_pos or token_is_neg):
             continue
 
+        # Proximity weight: words closer to the aspect keyword have stronger local influence
+        if aspect_indices:
+            min_dist = min(abs(i - idx) for idx in aspect_indices)
+            if min_dist > 6:
+                weight = 0.2
+            elif min_dist > 3:
+                weight = 0.6
+            else:
+                weight = 1.0
+        else:
+            weight = 1.0
+
         window_start = max(0, i - 3)
         window = tokens[window_start:i]
         is_negated = any(neg in NEGATION_TERMS for neg in window)
 
         if token_is_pos:
             if is_negated:
-                neg_score += 1.5
+                neg_score += 1.5 * weight
             else:
-                pos_score += 1.0
+                pos_score += 1.0 * weight
         elif token_is_neg:
             if is_negated:
-                pos_score += 1.0
+                pos_score += 1.0 * weight
             else:
-                neg_score += 1.5
+                neg_score += 1.5 * weight
 
     if pos_score > neg_score:
         return "pos"
