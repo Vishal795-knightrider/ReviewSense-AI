@@ -1,6 +1,6 @@
 # ReviewSense AI — Transformer-Based Product Review Sentiment Analyzer
 
-An interactive **Product Review Sentiment Analysis Dashboard** built using **pretrained Transformer models** (`cardiffnlp/twitter-roberta-base-sentiment-latest`) and **Streamlit**. Designed as a College CA2 project for Natural Language Processing and applied Deep Learning.
+An interactive **Product Review Sentiment Analysis Dashboard** built using **pretrained Transformer models** (`cardiffnlp/twitter-roberta-base-sentiment-latest`) and **Streamlit**. Built for high-performance Natural Language Processing and applied Deep Learning.
 
 The project demonstrates an end-to-end NLP workflow: **e-commerce review input → safe token truncation → batch transformer inference → interactive visual analytics & CSV export**.
 

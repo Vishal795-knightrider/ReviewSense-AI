@@ -72,19 +72,26 @@ st.markdown("""
         font-weight: 500;
         line-height: 1.4;
     }
-    .ca2-badge {
+    .header-status-pill {
         display: inline-flex;
         align-items: center;
         gap: 0.45rem;
-        background-color: #FFF4ED;
-        color: #EA580C !important;
-        border: 1px solid #FDBA74;
-        padding: 0.4rem 0.95rem;
+        background-color: #ECFDF5;
+        color: #065F46 !important;
+        border: 1px solid #A7F3D0;
+        padding: 0.35rem 0.85rem;
         border-radius: 9999px;
         font-size: 0.82rem;
         font-weight: 600;
         letter-spacing: 0.01em;
-        box-shadow: 0 1px 2px rgba(234, 88, 12, 0.06);
+        box-shadow: 0 1px 2px rgba(6, 95, 70, 0.05);
+    }
+    .header-status-pill .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: #10B981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
     }
     .meta-ticker {
         display: flex;
@@ -390,12 +397,86 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.15) !important;
     }
 
-    /* File Uploader styling */
+    /* Clean Code Styling (eliminates dark block in light theme) */
+    code, pre code {
+        background-color: #FFF4ED !important;
+        color: #C2410C !important;
+        border: 1px solid #FED7AA !important;
+        border-radius: 5px !important;
+        padding: 0.18rem 0.45rem !important;
+        font-size: 0.85em !important;
+        font-weight: 600 !important;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    }
+
+    /* File Uploader Complete Light Theme Styling */
     div[data-testid="stFileUploader"] {
         background-color: #FFFFFF !important;
+        border-radius: 14px !important;
+        padding: 0.2rem !important;
+    }
+    div[data-testid="stFileUploader"] section,
+    div[data-testid="stFileUploader"] [data-testid*="Dropzone"],
+    div[data-testid="stFileUploader"] [data-testid*="dropzone"],
+    section[data-testid="stFileUploadDropzone"],
+    div[data-testid="stFileUploadDropzone"] {
+        background-color: #FFFFFF !important;
+        border: 2px dashed #E5E0D8 !important;
         border-radius: 12px !important;
-        border: 1px dashed #D6CEC2 !important;
-        padding: 0.5rem 0.75rem !important;
+        padding: 1.5rem 1rem !important;
+        text-align: center !important;
+        transition: all 0.2s ease !important;
+    }
+    div[data-testid="stFileUploader"] section:hover,
+    section[data-testid="stFileUploadDropzone"]:hover {
+        border-color: #FF5A1F !important;
+        background-color: #FFFDFB !important;
+    }
+    /* Dropzone text and icon */
+    div[data-testid="stFileUploader"] section span,
+    div[data-testid="stFileUploader"] section small,
+    div[data-testid="stFileUploader"] section p,
+    div[data-testid="stFileUploader"] section div,
+    section[data-testid="stFileUploadDropzone"] * {
+        color: #52525B !important;
+        background-color: transparent !important;
+    }
+    div[data-testid="stFileUploader"] section svg,
+    section[data-testid="stFileUploadDropzone"] svg {
+        fill: #FF5A1F !important;
+        color: #FF5A1F !important;
+    }
+    /* "Browse files" button inside File Uploader */
+    div[data-testid="stFileUploader"] section button,
+    section[data-testid="stFileUploadDropzone"] button,
+    div[data-testid="stFileUploader"] button[data-testid="baseButton-secondary"] {
+        background-color: #FAF8F5 !important;
+        color: #18181B !important;
+        border: 1px solid #D6CEC2 !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        padding: 0.45rem 1.25rem !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+        transition: all 0.15s ease !important;
+    }
+    div[data-testid="stFileUploader"] section button:hover,
+    section[data-testid="stFileUploadDropzone"] button:hover,
+    div[data-testid="stFileUploader"] button[data-testid="baseButton-secondary"]:hover {
+        background-color: #FFFFFF !important;
+        border-color: #FF5A1F !important;
+        color: #FF5A1F !important;
+        box-shadow: 0 2px 6px rgba(255, 90, 31, 0.15) !important;
+    }
+    /* Uploaded file badge / item */
+    div[data-testid="stFileUploader"] ul,
+    div[data-testid="stFileUploader"] li {
+        background-color: #FFFFFF !important;
+        border: 1px solid #ECE7DF !important;
+        border-radius: 8px !important;
+        color: #18181B !important;
+    }
+    div[data-testid="stFileUploader"] li * {
+        color: #18181B !important;
     }
 
     /* Selectbox & Inputs */
@@ -432,7 +513,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------
-# 2. Top Header Banner & CA2 Badge
+# 2. Top Header Banner
 # ---------------------------------------------
 st.markdown("""
 <div class="header-container">
@@ -440,8 +521,8 @@ st.markdown("""
         <div class="brand-title">
             🛍️ Review<span class="accent">Sense</span> AI
         </div>
-        <div class="ca2-badge">
-            <span>🎓</span> College CA2 Project • Natural Language Processing
+        <div class="header-status-pill">
+            <span class="status-dot"></span> Live RoBERTa Inference
         </div>
     </div>
     <div class="brand-subtitle">
@@ -752,7 +833,7 @@ with st.sidebar:
         <strong style="font-size: 1.15rem; color: #18181B;">Review<span style="color: #FF5A1F;">Sense</span> AI</strong>
     </div>
     <div style="font-size: 0.8rem; color: #71717A; margin-bottom: 0.9rem;">
-        College CA2 Project • Natural Language Processing
+        Transformer-Based Sentiment Intelligence
     </div>
     """, unsafe_allow_html=True)
     st.markdown("---")
@@ -1034,7 +1115,7 @@ st.markdown("<hr style='margin: 1.8rem 0; border: none; border-top: 1px solid #E
 
 st.markdown("""
 <div class="hopup-card-title">📂 Batch Review Analysis (CSV Upload)</div>
-<div class="hopup-card-subtitle">Upload your custom e-commerce review dataset in CSV format (or test with <code>Data/Clean/product_reviews.csv</code>).</div>
+<div class="hopup-card-subtitle">Upload your custom e-commerce review dataset in CSV format (or test with <span style="background-color: #FFF4ED; color: #EA580C; padding: 0.15rem 0.45rem; border-radius: 5px; font-weight: 600; border: 1px solid #FED7AA; font-size: 0.85rem;">Data/Clean/product_reviews.csv</span>).</div>
 """, unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader(
@@ -1365,6 +1446,6 @@ if "data" in st.session_state and st.session_state["data"] is not None:
 st.markdown("<div style='height: 2.5rem;'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div style="text-align: center; font-size: 0.8rem; color: #A1A1AA; border-top: 1px solid #ECE7DF; padding-top: 1.25rem;">
-    ReviewSense AI • Transformer-Based Sentiment Intelligence • College CA2 NLP Project
+    ReviewSense AI • Transformer-Based Sentiment Intelligence
 </div>
 """, unsafe_allow_html=True)
