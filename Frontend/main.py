@@ -16,25 +16,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Subtle custom styling
+# Subtle custom styling (dark-theme and light-theme compatible)
 st.markdown("""
 <style>
     .main-title {
         font-size: 2.3rem;
         font-weight: 700;
-        color: #0F172A;
         margin-bottom: 0.1rem;
     }
     .sub-title {
         font-size: 1.05rem;
-        color: #475569;
+        opacity: 0.8;
         margin-bottom: 1.2rem;
-    }
-    .stMetric {
-        background-color: #F8FAFC;
-        padding: 0.75rem;
-        border-radius: 8px;
-        border: 1px solid #E2E8F0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -122,9 +115,26 @@ if st.button("Analyze Review", type="primary"):
             label = normalize_label(result["label"])
             score = round(float(result["score"]), 4)
 
+        sentiment_icons = {
+            "POSITIVE": "🟢",
+            "NEUTRAL": "⚪",
+            "NEGATIVE": "🔴"
+        }
+        icon = sentiment_icons.get(label, "🔹")
+
         col1, col2 = st.columns(2)
-        col1.metric("Predicted Sentiment", label)
-        col2.metric("Confidence Score", f"{score * 100:.1f}%")
+        with col1:
+            with st.container(border=True):
+                st.metric(
+                    label="Predicted Sentiment",
+                    value=f"{icon} {label}"
+                )
+        with col2:
+            with st.container(border=True):
+                st.metric(
+                    label="Confidence Score",
+                    value=f"{score * 100:.1f}%"
+                )
     else:
         st.warning("Please enter a review before analyzing.")
 
