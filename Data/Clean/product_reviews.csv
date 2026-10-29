@@ -1,31 +1,31 @@
 product_name,review,rating,expected_sentiment
-Samsung Galaxy S24,The battery easily lasts 2 full days of heavy use and the AMOLED display is stunning in bright sunlight.,5,POSITIVE
-Sony WH-1000XM5,Exceptional active noise cancellation and crystal clear audio quality. Best headphones for travel.,5,POSITIVE
-Apple MacBook Air M3,Blazing fast performance, completely silent operation, and the keyboard feel is top notch.,5,POSITIVE
-OnePlus 12,Ultra-fast 100W charging gets me from 10% to 100% in 25 minutes. Smooth 120Hz display.,5,POSITIVE
-Logitech MX Master 3S,Ergonomics are unmatched for daily software development and the magnetic scroll wheel is addictive.,5,POSITIVE
-Dell UltraSharp 27 Monitor,Color accuracy is spot on for video editing and the USB-C hub setup reduces desk cable clutter.,5,POSITIVE
-Anker 65W GaN Charger,Compact design that easily charges my laptop and smartphone simultaneously without heating up.,5,POSITIVE
-Kindle Paperwhite,The glare-free screen is very comfortable for night reading and battery lasts weeks on a single charge.,5,POSITIVE
-Google Pixel 8,The computational photography and voice dictation features are the best on any Android device.,5,POSITIVE
-Bose QuietComfort Earbuds,Great comfort for daily workout sessions with deep punchy bass and water resistance.,5,POSITIVE
-Xiaomi Redmi Note 13,The phone performs decent for daily social media and browsing, but the speaker volume is mediocre.,3,NEUTRAL
-Asus Vivobook 15,Adequate processing power for office work, though the battery life is average at roughly four hours.,3,NEUTRAL
-Boat Rockerz 450,Sound is acceptable for the cheap price, but the ear cushions start hurting after an hour of use.,3,NEUTRAL
-Lenovo Legion Gaming Laptop,Gaming performance is decent at 1080p, but the cooling fans get fairly loud under load.,3,NEUTRAL
-Samsung Galaxy Watch 6,Tracks steps and heart rate reasonably well, but having to charge it every single night is annoying.,3,NEUTRAL
-JBL Flip 6 Speaker,Volume output is loud enough for small rooms, but bass is somewhat flat at maximum levels.,3,NEUTRAL
-Motorola Edge 50 Fusion,Clean stock Android interface, but low-light camera photos have noticeable digital noise.,3,NEUTRAL
-HP Wireless Keyboard and Mouse,Works fine out of the box with plug and play, but key travel feels slightly stiff.,3,NEUTRAL
-Echo Dot 5th Gen,Microphone picks up commands fine, but audio quality is only suited for casual podcasts and news.,3,NEUTRAL
-Fire TV Stick 4K,Streaming is smooth with decent Wi-Fi connection, though the home screen is cluttered with sponsored ads.,3,NEUTRAL
-Realme Narzo 60,Device overheats severely within ten minutes of recording video or gaming and throttles down.,1,NEGATIVE
-Noise ColorFit Smartwatch,Stopped syncing steps to the smartphone app after two weeks. Customer support was completely unresponsive.,1,NEGATIVE
-Apple iPhone 15,Screen developed a visible green vertical line after a routine software update. Outrageous repair estimate.,1,NEGATIVE
-Dell Inspiron 14,Hinge cracked near the left corner during normal opening and closing after just three months.,1,NEGATIVE
-Boult Audio True Wireless,Left earbud stopped charging completely and the battery drains to zero in ten minutes.,1,NEGATIVE
-SanDisk 128GB Flash Drive,Extremely slow transfer speeds below 5MB/s and device disconnects constantly during file copy.,1,NEGATIVE
-TP-Link AC1200 Router,Frequently drops 5GHz Wi-Fi connection requiring a manual power cycle twice everyday.,1,NEGATIVE
-Zebronics Soundbar,Distorted audio and loud crackling noise whenever connected over HDMI ARC or Bluetooth.,1,NEGATIVE
-Generic USB-C Hub,Burned out my external SSD due to power surge. Terrible build quality and hazardous.,1,NEGATIVE
-Acer Aspire 3,Cheap flimsy plastic casing that creaks constantly and trackpad stopped registering double clicks.,1,NEGATIVE
+Samsung Galaxy S24,"The battery easily lasts 2 full days of heavy use and the AMOLED display is stunning in bright sunlight.",5,POSITIVE
+Sony WH-1000XM5,"Exceptional active noise cancellation and crystal clear audio quality. Best headphones for travel.",5,POSITIVE
+Apple MacBook Air M3,"Blazing fast performance, completely silent operation, and the keyboard feel is top notch.",5,POSITIVE
+OnePlus 12,"Ultra-fast 100W charging gets me from 10% to 100% in 25 minutes. Smooth 120Hz display.",5,POSITIVE
+Logitech MX Master 3S,"Ergonomics are unmatched for daily software development and the magnetic scroll wheel is addictive.",5,POSITIVE
+Dell UltraSharp 27 Monitor,"Color accuracy is spot on for video editing and the USB-C hub setup reduces desk cable clutter.",5,POSITIVE
+Anker 65W GaN Charger,"Compact design that easily charges my laptop and smartphone simultaneously without heating up.",5,POSITIVE
+Kindle Paperwhite,"The glare-free screen is very comfortable for night reading and battery lasts weeks on a single charge.",5,POSITIVE
+Google Pixel 8,"The computational photography and voice dictation features are the best on any Android device.",5,POSITIVE
+Bose QuietComfort Earbuds,"Great comfort for daily workout sessions with deep punchy bass and water resistance.",5,POSITIVE
+Xiaomi Redmi Note 13,"The phone performs decent for daily social media and browsing, but the speaker volume is mediocre.",3,NEUTRAL
+Asus Vivobook 15,"Adequate processing power for office work, though the battery life is average at roughly four hours.",3,NEUTRAL
+Boat Rockerz 450,"Sound is acceptable for the cheap price, but the ear cushions start hurting after an hour of use.",3,NEUTRAL
+Lenovo Legion Gaming Laptop,"Gaming performance is decent at 1080p, but the cooling fans get fairly loud under load.",3,NEUTRAL
+Samsung Galaxy Watch 6,"Tracks steps and heart rate reasonably well, but having to charge it every single night is annoying.",3,NEUTRAL
+JBL Flip 6 Speaker,"Volume output is loud enough for small rooms, but bass is somewhat flat at maximum levels.",3,NEUTRAL
+Motorola Edge 50 Fusion,"Clean stock Android interface, but low-light camera photos have noticeable digital noise.",3,NEUTRAL
+HP Wireless Keyboard and Mouse,"Works fine out of the box with plug and play, but key travel feels slightly stiff.",3,NEUTRAL
+Echo Dot 5th Gen,"Microphone picks up commands fine, but audio quality is only suited for casual podcasts and news.",3,NEUTRAL
+Fire TV Stick 4K,"Streaming is smooth with decent Wi-Fi connection, though the home screen is cluttered with sponsored ads.",3,NEUTRAL
+Realme Narzo 60,"Device overheats severely within ten minutes of recording video or gaming and throttles down.",1,NEGATIVE
+Noise ColorFit Smartwatch,"Stopped syncing steps to the smartphone app after two weeks. Customer support was completely unresponsive.",1,NEGATIVE
+Apple iPhone 15,"Screen developed a visible green vertical line after a routine software update. Outrageous repair estimate.",1,NEGATIVE
+Dell Inspiron 14,"Hinge cracked near the left corner during normal opening and closing after just three months.",1,NEGATIVE
+Boult Audio True Wireless,"Left earbud stopped charging completely and the battery drains to zero in ten minutes.",1,NEGATIVE
+SanDisk 128GB Flash Drive,"Extremely slow transfer speeds below 5MB/s and device disconnects constantly during file copy.",1,NEGATIVE
+TP-Link AC1200 Router,"Frequently drops 5GHz Wi-Fi connection requiring a manual power cycle twice everyday.",1,NEGATIVE
+Zebronics Soundbar,"Distorted audio and loud crackling noise whenever connected over HDMI ARC or Bluetooth.",1,NEGATIVE
+Generic USB-C Hub,"Burned out my external SSD due to power surge. Terrible build quality and hazardous.",1,NEGATIVE
+Acer Aspire 3,"Cheap flimsy plastic casing that creaks constantly and trackpad stopped registering double clicks.",1,NEGATIVE

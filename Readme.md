@@ -11,6 +11,7 @@ The project demonstrates an end-to-end NLP workflow: **e-commerce review input â
 This dashboard allows users to:
 
 * **Live Single Review Analysis:** Input any customer review or feedback and get predicted 3-class sentiment (`POSITIVE`, `NEUTRAL`, `NEGATIVE`) with model confidence.
+* **What Customers Like & Dislike:** Aspect-level feedback extraction identifying specific hardware and feature opinions (battery, display, camera, performance, heating, charging, build quality, audio, price) with quoted snippets and an executive opinion summary.
 * **One-Click Demo Data:** Instantly test with realistic smartphone and e-commerce product reviews.
 * **Batch CSV Processing:** Upload custom CSV files, select text columns, and analyze sentiment with row limiters.
 * **Safe Token Truncation:** Handles long reviews up to 512 tokens using subword truncation without runtime crashes.
